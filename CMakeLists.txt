@@ -1,0 +1,7 @@
+cmake_minimum_required(VERSION 2.8.9)
+project (aoc)
+add_executable(day1 day1.cpp aoc.h aoc.cpp)
+add_executable(day2 day2.cpp aoc.h aoc.cpp)
+add_executable(day3 day3.cpp aoc.h aoc.cpp)
+add_executable(day4 day4.cpp aoc.h aoc.cpp)
+add_executable(day5 day5.cpp aoc.h aoc.cpp)

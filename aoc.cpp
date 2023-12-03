@@ -5,7 +5,7 @@
 namespace aoc {
 void foreach(const std::string& filename, std::function<void(std::string line)> &&fun) {
   std::ifstream input;
-  input.open(filename);
+  input.open("../"+filename);
   std::string line;
   while (std::getline(input, line)) {
     fun(line);
