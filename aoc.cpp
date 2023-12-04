@@ -17,7 +17,9 @@ std::vector<std::string> split(const std::string& line, const std::string& delim
   size_t start = 0, end;
   std::vector<std::string> result;
   while((end = line.find(delimiter, start)) != std::string::npos) {
-    result.emplace_back(line.substr(start, end - start));
+    if (start != end) {
+      result.emplace_back(line.substr(start, end - start));
+    }
     start = end + delimiter.size();
   }
   result.emplace_back(line.substr(start, line.size() - start));
