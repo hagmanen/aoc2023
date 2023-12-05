@@ -1,6 +1,7 @@
 #include "aoc.h"
 
 #include <fstream>
+#include <algorithm>
 
 namespace aoc {
 void foreach(const std::string& filename, std::function<void(std::string line)> &&fun) {
@@ -23,6 +24,33 @@ std::vector<std::string> split(const std::string& line, const std::string& delim
     start = end + delimiter.size();
   }
   result.emplace_back(line.substr(start, line.size() - start));
+  return result;
+}
+
+std::set<int> intset(std::vector<std::string> &&numbers) {
+  std::set<int> result;
+  std::transform(numbers.begin(),
+                 numbers.end(),
+                 std::inserter(result, result.begin()),
+                 [] (const std::string& str){ return std::stoi(str);});
+  return result;
+}
+
+std::set<uint64_t> int64set(std::vector<std::string> &&numbers) {
+  std::set<uint64_t> result;
+  std::transform(numbers.begin(),
+                 numbers.end(),
+                 std::inserter(result, result.begin()),
+                 [] (const std::string& str){ return std::stoll(str);});
+  return result;
+}
+
+std::vector<uint64_t> int64vec(std::vector<std::string> &&numbers) {
+  std::vector<uint64_t> result;
+  std::transform(numbers.begin(),
+                 numbers.end(),
+                 std::back_inserter(result),
+                 [] (const std::string& str){ return std::stoll(str);});
   return result;
 }
 }

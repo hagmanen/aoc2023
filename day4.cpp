@@ -5,15 +5,6 @@
 #include <algorithm>
 #include <numeric>
 
-std::set<int> toIntSet(std::vector<std::string> &&numbers) {
-  std::set<int> result;
-  std::transform(numbers.begin(),
-                 numbers.end(),
-                 std::inserter(result, result.begin()),
-                 [] (const std::string& str){ return std::stoi(str);});
-  return result;
-}
-
 int gameScore1(const std::set<int> &winners, const std::set<int> &yours) {
   auto fun = [&yours] (int acc, int w) {
     if (yours.find(w) != yours.end()) {
@@ -50,8 +41,8 @@ int main() {
   aoc::foreach("day4.input", [&sum1, &cards] (std::string line) {
     const auto game = aoc::split(line, ": ");
     const auto numbers = aoc::split(game[1], " | ");
-    const auto winners = toIntSet(aoc::split(numbers[0], " "));
-    const auto yours = toIntSet(aoc::split(numbers[1], " "));
+    const auto winners = aoc::intset(aoc::split(numbers[0], " "));
+    const auto yours = aoc::intset(aoc::split(numbers[1], " "));
     sum1 += gameScore1(winners, yours);
     game2(cards, cardNumber(game[0]), winners, yours);
   });
