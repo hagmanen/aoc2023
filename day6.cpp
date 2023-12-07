@@ -7,7 +7,7 @@
 int waysToBeat(uint64_t time, uint64_t distance) {
   int ways = 0;
   for (uint64_t i = 1; i != time; ++i) {
-    if (distance / i < time - i) {++ways;}
+    if (distance < (time - i) * i) {++ways;}
   }
   return ways;
 }
