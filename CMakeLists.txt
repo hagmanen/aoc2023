@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.22)
 project (aoc)
-set (CMAKE_CXX_FLAGS "-Wall -pedantic -Os")
+set (CMAKE_CXX_FLAGS "-std=c++17 -Wall -pedantic")
 add_executable(day1 day1.cpp aoc.h aoc.cpp)
 add_executable(day2 day2.cpp aoc.h aoc.cpp)
 add_executable(day3 day3.cpp aoc.h aoc.cpp)
