@@ -36,6 +36,15 @@ std::set<int> intset(std::vector<std::string> &&numbers) {
   return result;
 }
 
+std::vector<int> intvec(std::vector<std::string> &&numbers) {
+  std::vector<int> result;
+  std::transform(numbers.begin(),
+                 numbers.end(),
+                 std::back_inserter(result),
+                 [] (const std::string& str){ return std::stoi(str);});
+  return result;
+}
+
 std::set<uint64_t> int64set(std::vector<std::string> &&numbers) {
   std::set<uint64_t> result;
   std::transform(numbers.begin(),
