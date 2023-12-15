@@ -3,7 +3,7 @@
 
 
 int main() {
-  aoc::foreach("day16.input", [] (std::string line) {
+  aoc::foreach("day17.input", [] (std::string line) {
     std::cout << line << std::endl;
   });
   std::cout << "part 1: " << "" << std::endl;
