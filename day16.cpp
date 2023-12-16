@@ -104,16 +104,11 @@ Beam step(const Beam& beam, char encounter, std::vector<Beam> &beams) {
   }
 }
 
-void energize(const Beam& beam, std::vector<Beam> &beams, const std::vector<std::string> &grid, std::set<Beam> &done) {
-  if (beam.x < 0 || beam.x >= grid.front().length() || beam.y < 0 || beam.y >= grid.size()) {
-    return;
+void energize(Beam &&beam, std::vector<Beam> &beams, const std::vector<std::string> &grid, std::set<Beam> &done) {
+  while (beam.x >= 0 && beam.x < grid.front().length() && beam.y >= 0 && beam.y < grid.size() && done.find(beam) == done.end()) {
+    done.insert(beam);
+    beam = step(beam, grid[beam.y][beam.x], beams);
   }
-  if (done.find(beam) != done.end()) {
-    return;
-  }
-  done.insert(beam);
-  auto new_beam = step(beam, grid[beam.y][beam.x], beams);
-  return energize(new_beam, beams, grid, done);
 }
 
 int unique(const std::set<Beam> &done) {
@@ -126,9 +121,9 @@ int energized(const Beam& origin_beam, const std::vector<std::string> &grid) {
   std::set<Beam> done;
   std::vector<Beam> beams = {origin_beam};
   while(!beams.empty()) {
-    const auto beam = beams.back();
+    auto beam = beams.back();
     beams.pop_back();
-    energize(beam, beams, grid, done);
+    energize(std::move(beam), beams, grid, done);
   }
   return unique(done);
 }
